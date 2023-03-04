@@ -16,7 +16,11 @@ export const Recommend = () => {
     const webcamRef = React.useRef(null)
     const capture = React.useCallback(
         () => {
-        const imageSrc = webcamRef.current.getScreenshot()
+        if (webcamRef.current) {
+            return webcamRef.current.getScreenshot()
+        } else {
+            return null
+        }
         },
         [webcamRef]
     )
@@ -77,11 +81,16 @@ export const Recommend = () => {
         console.log("start")
         setStarted(true)
         setShowPlayer(false)
-        setTimeout(() => {
-            getTracks()
-            setShowPlayer(true)
-        }
-        , 5000)
+        let src;
+        var intr = setInterval(function() {
+            src = capture()
+            if (src) {
+                clearInterval(intr);
+                console.log(src)
+                getTracks()
+                setShowPlayer(true)
+            }
+        }, 1000)
       }
 
     const logout = () => {
