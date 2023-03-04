@@ -6,14 +6,13 @@ import { Recommend } from './components/Recommend';
 import { useState } from 'react';
 
 function App() {
-  const [token, setToken] = useState(null);
 
   return (
     <div className="body">
         <Routes>
-          <Route path="/" element={<Home token={token} setToken={setToken}/>} /> 
+          <Route path="/" element={<Home />} /> 
           <Route path="/about" element={<About />} />
-          <Route path="/recommend" element={<Recommend token={token} />} />
+          <Route path="/recommend" element={<Recommend />} />
 
         </Routes>
       </div>

@@ -1,8 +1,8 @@
 import React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import SpotifyWebApi from 'spotify-web-api-js';
 
-export const Home = ({ token, setToken }) => {
+export const Home = () => {
 
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
     const REDIRECT_URI = "http://localhost:3000";
@@ -19,6 +19,7 @@ export const Home = ({ token, setToken }) => {
 
     const spotifyApi = new SpotifyWebApi();
     const [ name, setName ] = useState(null)
+    const [token, setToken] = useState(null);
 
     useEffect(() => {
         console.log("useEffect")
@@ -36,8 +37,10 @@ export const Home = ({ token, setToken }) => {
         spotifyApi.setAccessToken(token)
         async function fetchData() {
             await spotifyApi.getMe().then((data) => {
-                console.log(data.display_name)
+                console.log(data)
                 setName(data.display_name)
+            }).catch((err) => {
+                console.log(err)
             })
         }
         fetchData()
