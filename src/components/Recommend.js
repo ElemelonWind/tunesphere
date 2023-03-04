@@ -45,6 +45,10 @@ export const Recommend = () => {
     
         setToken(token)
         spotifyApi.setAccessToken(token)
+
+        if (!token) {
+            navigate("/")
+        }
         
       }, [])
 
@@ -121,8 +125,9 @@ export const Recommend = () => {
                             onClick={() => start()}
                             style={{fontSize: "25px", width:"200px"}}
                         >
-                            Start
+                            start
                         </button>
+                        <a href="/" style={{fontSize: "25px", width:"160px", marginLeft: "20px"}}>home</a>
                     </div>
                 </> :
                 <>
@@ -160,7 +165,7 @@ export const Recommend = () => {
                         onClick={() => setStarted(false)}
                         style={{fontSize: "25px", width:"200px"}}
                     >
-                        Stop
+                        stop
                     </button>
                 </div>
                 </>

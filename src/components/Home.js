@@ -37,8 +37,10 @@ export const Home = () => {
         spotifyApi.setAccessToken(token)
         async function fetchData() {
             await spotifyApi.getMe().then((data) => {
-                console.log(data)
-                setName(data.display_name)
+                if (data.display_name)
+                    setName(data.display_name)
+                else 
+                    logout()
             }).catch((err) => {
                 console.log(err)
             })
