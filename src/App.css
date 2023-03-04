@@ -1,0 +1,71 @@
+body {
+  background: slateblue;
+  font-family: 'Work Sans', sans-serif;
+}
+.container {
+  box-shadow: 1.5px 3.0px 3.0px hsl(0deg 0% 0% / 0.45);
+  display: flex;
+  background-color: darkslateblue;
+  justify-content: center;
+  text-align: center;
+  width: 85%;
+  height: 70%;
+  border-radius: 20px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 30px;
+}
+.container h1 {
+  text-shadow: 1.5px 3.0px 3.0px hsl(0deg 0% 0% / 0.45);
+  color: lightpink;
+  font-size: 50px;
+  font-family: 'Julius Sans One', sans-serif;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.container h2 {
+  text-shadow: 1.5px 3.0px 3.0px hsl(0deg 0% 0% / 0.45);
+  color: lightpink;
+  font-size: 30px;
+  font-family: 'Julius Sans One', sans-serif;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.container a, button {
+  box-shadow: 1.5px 3.0px 3.0px hsl(0deg 0% 0% / 0.45);
+  background-color: peachpuff;
+  color: darkslateblue;
+  font-size: 30px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  transition: all .25s ease-in-out;
+  margin-inline: 20px;
+  text-decoration: none;
+}
+.container a {
+  width: 200px;
+}
+.container button {
+  width: 240px;
+}
+.container a:hover, button:hover {
+  transform: scale(1.1);
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+.inner-container {
+  height: max-content;
+  margin: auto;
+  width: max-content;
+}
