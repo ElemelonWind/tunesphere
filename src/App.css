@@ -67,6 +67,13 @@ body {
 .inner-container {
   height: max-content;
   margin: auto;
+  width: max-content;
+}
+#about {
+  width: max-content;
+  padding: 100px;
+}
+#recommendation {
   width: 600px;
 }
 .profile-pic {
@@ -78,4 +85,8 @@ body {
 }
 .PlayerRSWP {
   border-radius: 10px;
+}
+.inner-container p {
+  color: white;
+  font-size: 20px;
 }

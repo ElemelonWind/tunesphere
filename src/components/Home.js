@@ -68,8 +68,8 @@ export const Home = () => {
             { token ? 
                 <>
                     <div className="button-container">
-                        <a href="/recommend">song recs</a>
-                        <a href="/concerts">concert finder</a> 
+                        <a href="/about">how it works</a>
+                        <a href="/recommend">explore songs</a>
                     </div>
                     <div className="button-container">
                     <a href="/profile">profile</a>

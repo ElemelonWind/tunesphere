@@ -153,7 +153,7 @@ export const Recommend = () => {
     
   return (
     <div className="container">
-        <div className="inner-container">
+        <div className="inner-container" id="recommendation">
             { !started ? 
                 <>
                     <h2 style={{marginBottom: "20px"}}>Camera Preview</h2>
