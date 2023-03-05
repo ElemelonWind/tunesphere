@@ -4,7 +4,6 @@ import Webcam from "react-webcam";
 import SpotifyWebApi from 'spotify-web-api-js';
 import { useNavigate } from "react-router-dom";
 import SpotifyPlayer from 'react-spotify-web-playback';
-//const tf = require("@tensorflow/tfjs");
 import * as tf from '@tensorflow/tfjs';
 
 export const Recommend = () => {
@@ -37,12 +36,7 @@ export const Recommend = () => {
 
     async function loadModel() {
         try {
-        // For layered model
-        //const model = await tf.loadLayersModel(`https://cors-anywhere.herokuapp.com/https://tunesphere.b-cdn.net/model.json`);
-        // For graph model
-        //const model = await tf.loadLayersModel(`https://tunesphere.b-cdn.net/model.json`);
         const model = await tf.loadLayersModel(`/models/image_emotion/model.json`);
-        // const model = await tf.loadGraphModel(url.model);
         setModel(model);
         console.log("Load model success")
         }
@@ -50,12 +44,6 @@ export const Recommend = () => {
         console.log(err);
         }
         }
-        // fetch('https://tunesphere.b-cdn.net/model.json', {
-        //     mode: 'no-cors' // 'cors' by default
-        //   })
-        //   .then(function(response) {
-        //     const model = tf.loadLayersModel(response);
-        //   });
 
     useEffect(() => {
         console.log("useEffect")
@@ -84,32 +72,41 @@ export const Recommend = () => {
       }, [])
 
     const getTracks = () => {
+        let splicedTracks = tracks.map((track) => {
+            return track.split(":")[2]
+        })
         spotifyApi.getRecommendations({
             limit: 1,
-          seed_genres: ["pop"]
+            seed_tracks: splicedTracks
         })
         .then((data) => {
-            // console.log(data.tracks.length)
-            // if (data.tracks.length <= 1) {
-            //     console.log("get tracks")
-            //     getTracks()
-            // } else {
-                let tracks = data.tracks.map((track) => {
-                    return track.uri
-                })
-                console.log(tracks)
-                setTracks(tracks)
-            // }
+            let tracks = data.tracks.map((track) => {
+                return track.uri
+            })
+            console.log(tracks)
+            setTracks(tracks)
         })
         .catch((err) => {
-          if (err.status === 401) {
+            console.log(err)
             logout()
             navigate("/")
-          }
-          else {
-            console.log(err)
-          }
         })
+      }
+
+      const initialStart = () => {
+        setStarted(true)
+        // user's top song
+        spotifyApi.getMyTopTracks({
+            limit: 50,
+            time_range: "short_term"
+            })
+            .then((data) => {
+                console.log(data.items[0])
+                // choose random track
+                let track = data.items[Math.floor(Math.random() * data.items.length)].uri
+                setTracks([track])
+                setShowPlayer(true)
+            })
       }
 
       const start = () => {
@@ -128,17 +125,19 @@ export const Recommend = () => {
                 let ctx = ofcanv.getContext('2d')
                 ctx.drawImage(image, 0, 0, 200, 200)
                 let id = ctx.getImageData(0, 0, 200, 200);
-                let idcopy = new Uint8ClampedArray(id.data);
-                //let imgdatcopy = id.data.slice();
-                console.log(id.data)
+
                 let t = tf.browser.fromPixels(id, 1)
                     .resizeNearestNeighbor([200, 200])
                     .toFloat()
                     .expandDims();
                 model.predict(t).data().then((pred)=>{
-                    console.log(pred)
-                    getTracks()
-                    setShowPlayer(true)
+                    console.log(pred[1])
+                    if (pred[1] === 0) { // happy
+                        getTracks()
+                        setShowPlayer(true)
+                    } else {
+                        initialStart()
+                    }
                 })    
             }
         }, 1000)
@@ -171,7 +170,7 @@ export const Recommend = () => {
                         className="button-container"
                     >
                         <button 
-                            onClick={() => start()}
+                            onClick={() => initialStart()}
                             style={{fontSize: "25px", width:"200px"}}
                         >
                             start
