@@ -14,7 +14,9 @@ export const Home = () => {
         "user-read-private", 
         "user-read-playback-state", 
         "user-modify-playback-state",
-        "user-top-read"
+        "user-top-read",
+        "user-library-read",
+        "user-library-modify"
     ];
 
     const spotifyApi = new SpotifyWebApi();

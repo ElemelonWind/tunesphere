@@ -179,6 +179,7 @@ export const Recommend = () => {
                     </div>
                 </> :
                 <>
+                <h2 style={{marginBottom: "20px"}}>Enjoy!</h2>
                 { !showPlayer ?
                     <>
                         <Webcam
@@ -193,6 +194,17 @@ export const Recommend = () => {
                     </> :
                     <>
                     { tracks ? <SpotifyPlayer
+                        styles={{
+                            bgColor:'#483d8b',
+                            color: '#FFFFFF',
+                            sliderColor: '#ffb6c1',
+                            sliderHandleColor: '#FFFFFF',
+                            trackArtistColor: '#FFFFFF',
+                            trackNameColor: '#FFFFFF',
+                            marginBottom: "20px",
+                            height: "150px",
+                        }}
+                        showSaveIcon={true}
                         token={token}
                         uris={tracks}
                         play={true}

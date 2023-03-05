@@ -1,11 +1,11 @@
 body {
-  background: slateblue;
+  background: #6a5acd;
   font-family: 'Work Sans', sans-serif;
 }
 .container {
   box-shadow: 1.5px 3.0px 3.0px hsl(0deg 0% 0% / 0.45);
   display: flex;
-  background-color: darkslateblue;
+  background-color: #473d8a;
   justify-content: center;
   text-align: center;
   width: 85%;
@@ -21,7 +21,7 @@ body {
 }
 .container h1 {
   text-shadow: 1.5px 3.0px 3.0px hsl(0deg 0% 0% / 0.45);
-  color: lightpink;
+  color: #ffb6c1;
   font-size: 50px;
   font-family: 'Julius Sans One', sans-serif;
   font-weight: bold;
@@ -35,7 +35,7 @@ body {
   font-weight: bold;
   margin-top: 5px;
 }
-.container a, button {
+.button-container a, .button-container button {
   box-shadow: 1.5px 3.0px 3.0px hsl(0deg 0% 0% / 0.45);
   background-color: peachpuff;
   color: darkslateblue;
@@ -51,13 +51,13 @@ body {
   margin-inline: 20px;
   text-decoration: none;
 }
-.container a {
+.button-container a {
   width: 200px;
 }
-.container button {
+.button-container button {
   width: 240px;
 }
-.container a:hover, button:hover {
+.button-container a:hover, .button-container button:hover {
   transform: scale(1.1);
 }
 .button-container {
@@ -67,7 +67,7 @@ body {
 .inner-container {
   height: max-content;
   margin: auto;
-  width: max-content;
+  width: 600px;
 }
 .profile-pic {
   border-radius: 50%;
@@ -75,4 +75,7 @@ body {
   height: 250px;
   margin: auto;
   margin-bottom: 0px;
+}
+.PlayerRSWP {
+  border-radius: 10px;
 }
