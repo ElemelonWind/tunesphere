@@ -4,6 +4,8 @@ import Webcam from "react-webcam";
 import SpotifyWebApi from 'spotify-web-api-js';
 import { useNavigate } from "react-router-dom";
 import SpotifyPlayer from 'react-spotify-web-playback';
+//const tf = require("@tensorflow/tfjs");
+import * as tf from '@tensorflow/tfjs';
 
 export const Recommend = () => {
 
@@ -30,6 +32,30 @@ export const Recommend = () => {
     const [tracks, setTracks] = useState(null)
     const [showPlayer, setShowPlayer] = useState(false) // show player
     const [token, setToken] = useState(null)
+    const [model, setModel] = useState();
+
+
+    async function loadModel() {
+        try {
+        // For layered model
+        //const model = await tf.loadLayersModel(`https://cors-anywhere.herokuapp.com/https://tunesphere.b-cdn.net/model.json`);
+        // For graph model
+        //const model = await tf.loadLayersModel(`https://tunesphere.b-cdn.net/model.json`);
+        const model = await tf.loadLayersModel(`/models/image_emotion/model.json`);
+        // const model = await tf.loadGraphModel(url.model);
+        setModel(model);
+        console.log("Load model success")
+        }
+        catch (err) {
+        console.log(err);
+        }
+        }
+        // fetch('https://tunesphere.b-cdn.net/model.json', {
+        //     mode: 'no-cors' // 'cors' by default
+        //   })
+        //   .then(function(response) {
+        //     const model = tf.loadLayersModel(response);
+        //   });
 
     useEffect(() => {
         console.log("useEffect")
@@ -45,6 +71,10 @@ export const Recommend = () => {
     
         setToken(token)
         spotifyApi.setAccessToken(token)
+
+        tf.ready().then(()=>{
+            loadModel()
+        })
         
       }, [])
 
@@ -87,11 +117,29 @@ export const Recommend = () => {
             if (src) {
                 clearInterval(intr);
                 console.log(src)
-                getTracks()
-                setShowPlayer(true)
+                let image = new Image()
+                image.src = src
+                let ofcanv = new OffscreenCanvas(200, 200)
+                let ctx = ofcanv.getContext('2d')
+                ctx.drawImage(image, 0, 0, 200, 200)
+                let id = ctx.getImageData(0, 0, 200, 200);
+                let idcopy = new Uint8ClampedArray(id.data);
+                //let imgdatcopy = id.data.slice();
+                console.log(id.data)
+                let t = tf.browser.fromPixels(id, 1)
+                    .resizeNearestNeighbor([200, 200])
+                    .toFloat()
+                    .expandDims();
+                model.predict(t).data().then((pred)=>{
+                    console.log(pred)
+                    getTracks()
+                    setShowPlayer(true)
+                })    
             }
         }, 1000)
       }
+
+      
 
     const logout = () => {
         setToken("")
