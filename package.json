@@ -4,11 +4,10 @@
   "private": true,
   "dependencies": {
     "@tensorflow/tfjs": "^4.2.0",
-    "@tensorflow/tfjs-converter": "^4.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "firebase": "^9.17.2",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.2",
@@ -18,11 +17,13 @@
     "spotify-web-api-js": "^1.5.2",
     "web-vitals": "^2.1.4"
   },
+  "homepage":"https://elemelonwind.github.io/tunesphere",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
