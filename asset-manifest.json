@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tunesphere/static/css/main.6fb7aaf2.css",
-    "main.js": "/tunesphere/static/js/main.353ccfb0.js",
+    "main.js": "/tunesphere/static/js/main.bc49cfeb.js",
     "static/js/787.2e6f5489.chunk.js": "/tunesphere/static/js/787.2e6f5489.chunk.js",
     "index.html": "/tunesphere/index.html",
     "main.6fb7aaf2.css.map": "/tunesphere/static/css/main.6fb7aaf2.css.map",
-    "main.353ccfb0.js.map": "/tunesphere/static/js/main.353ccfb0.js.map",
+    "main.bc49cfeb.js.map": "/tunesphere/static/js/main.bc49cfeb.js.map",
     "787.2e6f5489.chunk.js.map": "/tunesphere/static/js/787.2e6f5489.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6fb7aaf2.css",
-    "static/js/main.353ccfb0.js"
+    "static/js/main.bc49cfeb.js"
   ]
 }
