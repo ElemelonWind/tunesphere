@@ -1,7 +1,9 @@
 # Tunesphere
-<!-- ![eye logo](https://anishs37.github.io/cse-website/static/media/logo128x.6cda3e83b3794444c9cb.png) -->
-
 Discover new beats and broaden your horizons 
+
+[Devpost](https://devpost.com/software/tunesphere)
+
+[Demo](https://youtu.be/-aIfZkRQiyE)
 ## Inspiration
 As high schoolers, music plays a large role in our mental health and maintaining healthy relationships with our peers. It’s a medium for us to share our interests and bond through concerts, shared earbuds, and midnight jam outs. However, we noticed how difficult it was for people who listen to one kind of song to share their interest with others. People tend to form their own listening circles, sometimes leaving others out. Our goal was to create a platform that bridged listening circles through expanding the genres the user listens to by slowly introducing them to new genres. Introducing Tunesphere.
 ## How did we build it?
