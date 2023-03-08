@@ -4,6 +4,9 @@ Discover new beats and broaden your horizons
 [Devpost](https://devpost.com/software/tunesphere)
 
 [Demo](https://youtu.be/-aIfZkRQiyE)
+
+## Disclaimer
+This app was built using the Spotify Developer API, which in its development mode only allows whitelisted users to sign in with Spotify OAuth (otherwise, you'll get an invalid token error). We may apply for a quota extention request in the future, which allows everyone to sign in, but for now if you want to test it you'll have to get whitelisted by us.
 ## Inspiration
 As high schoolers, music plays a large role in our mental health and maintaining healthy relationships with our peers. It’s a medium for us to share our interests and bond through concerts, shared earbuds, and midnight jam outs. However, we noticed how difficult it was for people who listen to one kind of song to share their interest with others. People tend to form their own listening circles, sometimes leaving others out. Our goal was to create a platform that bridged listening circles through expanding the genres the user listens to by slowly introducing them to new genres. Introducing Tunesphere.
 ## How did we build it?

@@ -1,15 +1,12 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import SpotifyWebApi from 'spotify-web-api-js';
-import { useNavigate } from "react-router-dom";
 
-export const Profile = () => {
+export const Profile = ({ setPage }) => {
 
     const spotifyApi = new SpotifyWebApi()
     const [token, setToken] = useState(null)
     const [profile, setProfile] = useState(null)
-
-    const navigate = useNavigate()
 
     useEffect(() => {
         console.log("useEffect")
@@ -27,7 +24,7 @@ export const Profile = () => {
         spotifyApi.setAccessToken(token)
 
         if (!token) {
-            navigate("/")
+            setPage(0)
         }
 
         getProfile()
@@ -38,7 +35,7 @@ export const Profile = () => {
         setToken("")
         window.localStorage.removeItem("token")
         spotifyApi.setAccessToken("")
-        navigate("/")
+        setPage(0)
     }
 
     const getProfile = () => {
@@ -65,7 +62,7 @@ export const Profile = () => {
             <h2>{profile?.email}</h2>
             <h2>{profile?.followers.total} followers</h2>
             <div className="button-container">
-                <a href="/">home</a>
+                <button onClick={() => {setPage(0)}}>home</button>
                 <button onClick={logout}>log out</button>
             </div>
         </div>

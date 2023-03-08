@@ -2,10 +2,11 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import SpotifyWebApi from 'spotify-web-api-js';
 
-export const Home = () => {
+export const Home = ({ setPage }) => {
 
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-    const REDIRECT_URI = "http://localhost:3000";
+    // localhost if in dev
+    const REDIRECT_URI = process.env.NODE_ENV === "development" ? "http://localhost:3000/tunesphere/" : "https://elemelonwind.github.io/tunesphere";
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
     const RESPONSE_TYPE = "token";
     const SCOPES = [
@@ -47,9 +48,10 @@ export const Home = () => {
                 logout()
             })
         }
-        fetchData()
+        if (token)
+            fetchData()
         
-      }, [name])
+      }, [])
 
     const logout = () => {
         setToken("")
@@ -68,16 +70,16 @@ export const Home = () => {
             { token ? 
                 <>
                     <div className="button-container">
-                        <a href="/about">how it works</a>
-                        <a href="/recommend">explore songs</a>
+                        <button onClick={() => {setPage(1)}}>how it works</button>
+                        <button onClick={() => {setPage(2)}}>explore songs</button>
                     </div>
                     <div className="button-container">
-                    <a href="/profile">profile</a>
+                    <button onClick={() => {setPage(3)}}>profile</button>
                     <button onClick={logout}>log out</button> 
                 </div>
                 </> :
                 <div className="button-container">
-                    <a href="/about">how it works</a>
+                    <button onClick={() => {setPage(1)}}>how it works</button>
                     <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPES.join("%20")}`}>
                         sign in
                     </a>

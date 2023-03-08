@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const About = () => {
+export const About = ({ setPage }) => {
   return (
     <div className="container">
       <div className="inner-container" id="about">
@@ -20,10 +20,10 @@ export const About = () => {
           ♥ ~ Anish, Cindy & Eric
         </p>
         <div className="button-container">
-          <a href="/" style={{
+          <button onClick={() => {setPage(0)}} style={{
             fontSize: "20px",
             width: "100px"
-          }}>home</a>
+          }}>home</button>
         </div>
       </div>
     </div>

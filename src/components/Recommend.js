@@ -2,11 +2,10 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import Webcam from "react-webcam";
 import SpotifyWebApi from 'spotify-web-api-js';
-import { useNavigate } from "react-router-dom";
 import SpotifyPlayer from 'react-spotify-web-playback';
 import * as tf from '@tensorflow/tfjs';
 
-export const Recommend = () => {
+export const Recommend = ({ setPage }) => {
 
     const [ started , setStarted ] = useState(false)
     const videoConstraints = {
@@ -26,7 +25,6 @@ export const Recommend = () => {
         [webcamRef]
     )
 
-    const navigate = useNavigate()
     const spotifyApi = new SpotifyWebApi()
     const [tracks, setTracks] = useState(null)
     const [showPlayer, setShowPlayer] = useState(false) // show player
@@ -36,7 +34,7 @@ export const Recommend = () => {
 
     async function loadModel() {
         try {
-        const model = await tf.loadLayersModel(`/models/image_emotion/model.json`);
+        const model = await tf.loadLayersModel(`/tunesphere/models/image_emotion/model.json`);
         setModel(model);
         console.log("Load model success")
         }
@@ -61,7 +59,7 @@ export const Recommend = () => {
         spotifyApi.setAccessToken(token)
 
         if (!token) {
-            navigate("/")
+            setPage(0)
         }
 
         tf.ready().then(()=>{
@@ -89,7 +87,7 @@ export const Recommend = () => {
         .catch((err) => {
             console.log(err)
             logout()
-            navigate("/")
+            setPage(0)
         })
       }
 
@@ -175,7 +173,7 @@ export const Recommend = () => {
                         >
                             start
                         </button>
-                        <a href="/" style={{fontSize: "25px", width:"160px", marginLeft: "20px"}}>home</a>
+                        <button onClick={() => {setPage(0)}} style={{fontSize: "25px", width:"200px", marginLeft: "20px"}}>home</button>
                     </div>
                 </> :
                 <>
@@ -207,7 +205,7 @@ export const Recommend = () => {
                         showSaveIcon={true}
                         token={token}
                         uris={tracks}
-                        play={true}
+                        autoPlay={true}
                         callback={state => {
                         console.log(state)
                         if (state.progressMs === 0 && state.isPlaying === false && state.status === "READY" && state.isActive === true) {
